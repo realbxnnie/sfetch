@@ -5,7 +5,7 @@ if [ ! -d ~/.config/sfetch ]; then
     exit 1
 fi
 
-echo Unnstalling sfetch...
+echo Uninstalling sfetch...
 
 rm -r ~/.config/sfetch
 sudo bash -c "rm -f /usr/bin/sfetch"

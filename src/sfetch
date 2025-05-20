@@ -1,24 +1,37 @@
 #!/bin/sh
 # (C) realbxnnie, 2025
 
-source /etc/os-release
-source ~/.config/sfetch/config.conf
+. /etc/os-release
+. ~/.config/sfetch/config.conf
+
 echo $(whoami)@$(hostname)
 
 ansi="\e[$ANSI_COLOR"m
+
+if [ "$1" = "--color" ] || [ "$1" = "-c" ]; then
+    ansi="\e[$2"m
+fi
+
 max=$(echo $(whoami)@$(hostname) | wc -m)
 dashes=""
-
+ 
 for ((i=1; i<=max; i=i+1))
 do 
       dashes="$dashes-"
 done
 
 echo -e $ansi$dashes
+sleep $DELAY
 echo -e $ansi"$distro    \e[0;m $PRETTY_NAME $VERSION_ID"
+sleep $DELAY
 echo -e $ansi"$kernel    \e[0;m $(uname -r)"
+sleep $DELAY
 echo -e $ansi"$cpu        \e[0;m$(grep -m1 'model name' /proc/cpuinfo | cut -d ':' -f2 | sed 's/^ //')"
+sleep $DELAY
 echo -e $ansi"$gpu       \e[0;m$(lspci | grep VGA | cut -d ':' -f 3- | sed 's/ (rev.*)//')"
+sleep $DELAY
 echo -e $ansi"$uptime    \e[0;m $(uptime -p)"
+sleep $DELAY
 echo -e $ansi"$desktop    \e[0;m$XDG_CURRENT_DESKTOP"
+sleep $DELAY
 echo -e $ansi"$shell      \e[4;34m$SHELL\e[0;m"
