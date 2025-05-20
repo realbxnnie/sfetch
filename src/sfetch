@@ -32,6 +32,6 @@ echo -e $ansi"$gpu       \e[0;m$(lspci | grep VGA | cut -d ':' -f 3- | sed 's/ (
 sleep $DELAY
 echo -e $ansi"$uptime    \e[0;m $(uptime -p)"
 sleep $DELAY
-echo -e $ansi"$desktop    \e[0;m$XDG_CURRENT_DESKTOP"
+echo -e "${ansi}${desktop}   \e[0;m ${XDG_CURRENT_DESKTOP:-\e[0;30mNo DE found\e[0m}"
 sleep $DELAY
 echo -e $ansi"$shell      \e[4;34m$SHELL\e[0;m"
